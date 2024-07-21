@@ -107,8 +107,17 @@ export default function Home() {
         </div>
 
         <div>
-          <h2 className="text-lg font-semibold mb-2">Current Wind and Humidity</h2>
-          {/* Render wind and humidity data here */}
+          <h2 className="text-lg font-semibold mb-2 text-center">Current Wind and Humidity</h2>
+          <div className="flex justify-evenly">
+            <div className="misc-info">
+              <h2>Wind Status</h2>
+              <p>{currentWeatherData.windSpeed} km/h</p>
+            </div>
+            <div className="misc-info">
+              <h2>Humidity</h2>
+              <p>{currentWeatherData.humidity}%</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
