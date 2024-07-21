@@ -119,10 +119,25 @@ export default function Home() {
                 <div className="misc-info text-center">
                   <h3 className="font-semibold">Wind Status</h3>
                   <p>{currentWeatherData.windSpeed} km/h</p>
+                  <div className="flex mt-2">
+                    <svg
+                      className="w-8 h-8 transform"
+                      style={{ transform: `rotate(${currentWeatherData.windDegrees}deg)` }}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l-7-7 7-7" />
+                    </svg>
+                    <p className="mt-1">{currentWeatherData.windDirection}</p>
+                  </div>
+
                 </div>
                 <div className="misc-info text-center">
                   <h3 className="font-semibold">Humidity</h3>
                   <p>{currentWeatherData.humidity}%</p>
+                  <progress className="progress" value={currentWeatherData.humidity} max="100"></progress>
                 </div>
               </>
             )}
