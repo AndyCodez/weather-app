@@ -49,21 +49,29 @@ export default function Home() {
 
       {/* Main section with search and weather forecast */}
       <div className="md:w-3/4 flex flex-col bg-white shadow-md rounded-lg p-4">
-        <div className="mb-4">
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="Search city..."
-            className="input input-primary w-full"
-          />
-          <button
-            onClick={fetchWeatherForCity}
-            className="btn btn-primary mt-2"
-          >
-            {loading ? 'Loading...' : 'GO'}
-          </button>
-          {error && <p className="text-error mt-2">{error}</p>}
+        <div className="navbar">
+          <div className="navbar-start">
+            <input
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="Search city..."
+              className="input input-primary w-full"
+            />
+            <button
+              onClick={fetchWeatherForCity}
+              className="btn btn-primary mt-2"
+            >
+              {loading ? 'Loading...' : 'GO'}
+            </button>
+            {error && <p className="text-error mt-2">{error}</p>}
+          </div>
+
+
+          <div className="btn-group btn-group-scrollable">
+            <input type="radio" name="options" data-content="&#176;C" className="btn" />
+            <input type="radio" name="options" data-content="F" className="btn" />
+          </div>
         </div>
 
         <div className="mb-4">
