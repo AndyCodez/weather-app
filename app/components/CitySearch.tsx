@@ -34,14 +34,14 @@ const CitySearch: React.FC<CitySearchProps> = ({ citySearch, onCitySearchChange,
                     type="radio"
                     name="options"
                     data-content="&#176;C"
-                    className={units === 'metric' ? `btn btn-active` : 'btn'}
+                    className={units === 'metric' ? `btn bg-green-9` : 'btn'}
                     onClick={() => onUnitsChange('metric')}
                 />
                 <input
                     type="radio"
                     name="options"
                     data-content="&#176;F"
-                    className={units === 'imperial' ? `btn btn-active` : 'btn'}
+                    className={units === 'imperial' ? `btn bg-green-9` : 'btn'}
                     onClick={() => onUnitsChange('imperial')}
                 />
             </div>
