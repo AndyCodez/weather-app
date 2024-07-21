@@ -89,9 +89,21 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold mb-2">Forecast Data</h2>
-          {/* Render forecast data here */}
+        <div className="my-8">
+          <h2 className="text-lg font-semibold mb-2 text-center">3 Days Forecast</h2>
+          <div className="flex justify-evenly">
+            {forecastData.map(data =>
+              <div className="forecast-data">
+                <p>{data.date}</p>
+                <img
+                  src={`http://openweathermap.org/img/wn/${data.icon}.png`}
+                  alt={data.description}
+                  className="h-12 w-12"
+                />
+                <p>{data.description}</p>
+              </div>
+            )}
+          </div>
         </div>
 
         <div>
