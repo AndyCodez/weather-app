@@ -3,8 +3,8 @@ import { useState } from "react";
 
 export default function Home() {
   const [city, setCity] = useState('');
-  const [currentWeatherData, setCurrentWeatherData] = useState();
-  const [forecastData, setForecastData] = useState([]);
+  const [currentWeatherData, setCurrentWeatherData] = useState<any>();
+  const [forecastData, setForecastData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,7 +18,7 @@ export default function Home() {
       const response = await fetch(`http://localhost:8000/api/weather?city=${city}`);
       const data = await response.json();
 
-      console.log(data)
+      console.log(data);
       updateWeatherData(data);
     } catch (err) {
       console.error("Error fetching weather:", err);
@@ -31,7 +31,7 @@ export default function Home() {
   const updateWeatherData = (weatherData: any) => {
     setCurrentWeatherData(weatherData.current_weather);
     setForecastData(weatherData.forecast);
-  }
+  };
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -42,7 +42,7 @@ export default function Home() {
         {currentWeatherData && (
           <div>
             <p className="font-medium">{currentWeatherData.temp}&#176;C</p>
-            <p>Temperature: {currentWeatherData.description}&#176;C</p>
+            <p>Temperature: {currentWeatherData.description}</p>
           </div>
         )}
       </div>
@@ -55,15 +55,15 @@ export default function Home() {
             value={city}
             onChange={(e) => setCity(e.target.value)}
             placeholder="Search city..."
-            className="border border-gray-300 rounded-lg p-2 w-full"
+            className="input input-primary w-full"
           />
           <button
             onClick={fetchWeatherForCity}
-            className="bg-blue-500 text-white rounded-lg px-4 py-2 mt-2"
+            className="btn btn-primary mt-2"
           >
             {loading ? 'Loading...' : 'GO'}
           </button>
-          {error && <p className="text-red-500 mt-2">{error}</p>}
+          {error && <p className="text-error mt-2">{error}</p>}
         </div>
 
         <div className="mb-4">
