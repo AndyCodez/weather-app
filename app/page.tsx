@@ -105,6 +105,7 @@ export default function Home() {
                   className="h-12 w-12 mx-auto"
                 />
                 <p className="capitalize mt-2">{data.description}</p>
+                <p>{data.tempMin} - {data.tempMax}&#176;{units === 'metric' ? 'C' : 'F'}</p>
               </div>
             ))}
           </div>
