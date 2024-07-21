@@ -51,6 +51,7 @@ export default function Home() {
       if (!response.ok) throw new Error('Network response was not ok');
       const data: WeatherData = await response.json();
       setCity(citySearch);
+      setCitySearch("");
       updateWeatherData(data);
     } catch (err) {
       console.error("Error fetching weather:", err);
