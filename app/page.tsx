@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import WeatherInput from "./components/WeatherInput";
 
 interface WeatherData {
   current_weather: {
@@ -25,7 +26,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Home() {
   const [city, setCity] = useState('Nairobi');
-  const [citySearch, setCitySearch] = useState('');
+  const [citySearch, setCitySearch] = useState('Nairobi');
   const [units, setUnits] = useState('metric');
   const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData['current_weather'] | null>(null);
   const [forecastData, setForecastData] = useState<WeatherData['forecast']>([]);
@@ -64,8 +65,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="loader"></div>
-        <p className="sr-only">Loading weather data...</p>
+        <p>Loading weather data...</p>
       </div>
     );
   }
@@ -96,41 +96,14 @@ export default function Home() {
 
       {/* Main section with search and weather forecast */}
       <div className="md:w-3/4 flex flex-col bg-white shadow-md rounded-lg p-6">
-        <div className="navbar">
-          <div className="navbar-start">
-            <input
-              type="text"
-              value={citySearch}
-              onChange={(e) => setCitySearch(e.target.value)}
-              placeholder="Search city..."
-              className="input input-primary w-full max-w-xs"
-            />
-            <button
-              onClick={fetchWeatherForCity}
-              className="btn btn-primary ml-7"
-            >
-              GO
-            </button>
-          </div>
-          {error && <p className="text-error mt-2">{error}</p>}
-
-          <div className="btn-group btn-group-scrollable mt-4 md:mt-0">
-            <input
-              type="radio"
-              name="options"
-              data-content="&#176;C"
-              className={units === 'metric' ? `btn btn-active` : 'btn'}
-              onClick={() => setUnits('metric')}
-            />
-            <input
-              type="radio"
-              name="options"
-              data-content="&#176;F"
-              className={units === 'imperial' ? `btn btn-active` : 'btn'}
-              onClick={() => setUnits('imperial')}
-            />
-          </div>
-        </div>
+        <WeatherInput
+          citySearch={citySearch}
+          onCitySearchChange={(e) => setCitySearch(e.target.value)}
+          onFetchWeather={fetchWeatherForCity}
+          units={units}
+          onUnitsChange={setUnits}
+          error={error}
+        />
 
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-4 text-center">3 Days Forecast</h2>
