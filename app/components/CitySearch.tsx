@@ -11,7 +11,7 @@ interface CitySearchProps {
 
 const CitySearch: React.FC<CitySearchProps> = ({ citySearch, onCitySearchChange, onFetchWeather, units, onUnitsChange, error }: CitySearchProps) => {
     return (
-        <div className="navbar">
+        <div className="navbar fixed top-0 left-0 md:static">
             <div className="navbar-start">
                 <input
                     type="text"

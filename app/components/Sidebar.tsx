@@ -14,7 +14,7 @@ interface WeatherData {
 }
 const Sidebar = ({ currentWeatherData, units, city }: SidebarProps) => {
     return (
-        <div className="md:w-1/4 bg-white shadow-md rounded-lg p-6 mb-4 md:mb-0 flex flex-col justify-center">
+        <div className="md:w-1/4 bg-white shadow-md rounded-lg p-6 mb-4 md:mb-0 flex flex-col justify-center mt-16 md:mt-0">
             <h2 className="text-xl font-semibold mb-4 text-center">Current Weather</h2>
             {currentWeatherData && (
                 <div className="text-center grid grid-flow-row gap-7">
