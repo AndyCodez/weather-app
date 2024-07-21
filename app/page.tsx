@@ -50,19 +50,21 @@ export default function Home() {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
       {/* Sidebar for current weather details */}
-      <div className="md:w-1/4 bg-white shadow-md rounded-lg p-6 mb-4 md:mb-0">
+      <div className="md:w-1/4 bg-white shadow-md rounded-lg p-6 mb-4 md:mb-0 flex flex-col justify-center">
         <h2 className="text-xl font-semibold mb-4 text-center">Current Weather</h2>
         {currentWeatherData && (
-          <div className="text-center">
+          <div className="text-center grid grid-flow-row gap-7">
             <img
               src={`http://openweathermap.org/img/wn/${currentWeatherData.icon}.png`}
               alt={currentWeatherData.description}
               className="h-16 w-16 mx-auto"
             />
-            <p className="text-2xl font-bold mt-2">{currentWeatherData.temp}&#176;{units === 'metric' ? 'C' : 'F'}</p>
-            <p className="capitalize">{currentWeatherData.description}</p>
-            <p>{new Date(currentWeatherData.date).toLocaleDateString()}</p>
-            <p className="mt-2">{city}</p>
+            <div>
+              <p className="text-2xl font-bold">{currentWeatherData.temp}&#176;{units === 'metric' ? 'C' : 'F'}</p>
+              <p className="capitalize">{currentWeatherData.description}</p>
+              <p>{new Date(currentWeatherData.date).toLocaleDateString()}</p>
+              <p className="mt-2">{city}</p>
+            </div>
           </div>
         )}
       </div>
@@ -97,12 +99,12 @@ export default function Home() {
           <h2 className="text-xl font-semibold mb-4 text-center">3 Days Forecast</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {forecastData.map(data => (
-              <div key={data.date} className="forecast-data bg-gray-50 p-4 rounded-lg shadow-md text-center">
+              <div key={data.date} className="bg-gray-50 p-4 rounded-lg shadow-md text-center">
                 <p className="font-semibold">{new Date(data.date).toLocaleDateString()}</p>
                 <img
                   src={`http://openweathermap.org/img/wn/${data.icon}.png`}
                   alt={data.description}
-                  className="h-12 w-12 mx-auto"
+                  className="h-16 w-16 mx-auto"
                 />
                 <p className="capitalize mt-2">{data.description}</p>
                 <p>{data.tempMin} - {data.tempMax}&#176;{units === 'metric' ? 'C' : 'F'}</p>
@@ -116,10 +118,10 @@ export default function Home() {
           <div className="flex justify-evenly">
             {currentWeatherData && (
               <>
-                <div className="misc-info text-center">
-                  <h3 className="font-semibold">Wind Status</h3>
+                <div className="bg-gray-50 p-4 rounded-lg shadow-md text-center w-[180px]">
+                  <h3 className="font-semibold my-2">Wind Status</h3>
                   <p>{currentWeatherData.windSpeed} km/h</p>
-                  <div className="flex mt-2">
+                  <div className="flex mt-2 justify-center">
                     <svg
                       className="w-8 h-8 transform"
                       style={{ transform: `rotate(${currentWeatherData.windDegrees}deg)` }}
@@ -130,13 +132,13 @@ export default function Home() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l-7-7 7-7" />
                     </svg>
-                    <p className="mt-1">{currentWeatherData.windDirection}</p>
+                    <p>{currentWeatherData.windDirection}</p>
                   </div>
 
                 </div>
-                <div className="misc-info text-center">
-                  <h3 className="font-semibold">Humidity</h3>
-                  <p>{currentWeatherData.humidity}%</p>
+                <div className="bg-gray-50 p-4 rounded-lg shadow-md text-center w-[180px]">
+                  <h3 className="font-semibold my-2">Humidity</h3>
+                  <p className="mb-1">{currentWeatherData.humidity}%</p>
                   <progress className="progress" value={currentWeatherData.humidity} max="100"></progress>
                 </div>
               </>
