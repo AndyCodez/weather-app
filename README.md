@@ -4,6 +4,9 @@ This is the frontend part of the Weather App built using Next.js with TypeScript
 
 Backend API can be found [here](https://github.com/AndyCodez/weather-app-backend).
 
+![WeatherApp](https://github.com/user-attachments/assets/0d91dbb6-4dae-42d5-aff0-dba7d4c94017)
+
+
 ## Features
 
 - Display current day's weather icon, temperature, weather description, date, and location.
