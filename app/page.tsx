@@ -34,13 +34,17 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row min-h-svh">
       {/* Sidebar for current weather details */}
       <div className="md:w-1/4 shadow-md rounded-lg p-4 mb-4 md:mb-0">
         <h2 className="text-lg font-semibold mb-2">Current Weather</h2>
-        {/* Render current weather details here */}
         {currentWeatherData && (
           <div>
+            <img
+              src={`http://openweathermap.org/img/wn/${currentWeatherData.icon}.png`}
+              alt={currentWeatherData.description}
+              className="h-12 w-12"
+            />
             <p className="font-medium">{currentWeatherData.temp}&#176;C</p>
             <p>Temperature: {currentWeatherData.description}</p>
           </div>
