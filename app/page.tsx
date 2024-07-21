@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import WeatherInput from "./components/WeatherInput";
+import WeatherCard from "./components/WeatherCard";
 
 interface WeatherData {
   current_weather: {
@@ -107,22 +108,7 @@ export default function Home() {
 
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-4 text-center">3 Days Forecast</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {forecastData.map((data) => (
-              <div key={data.date} className="bg-gray-50 p-4 rounded-lg shadow-md text-center">
-                <p className="font-semibold">{new Date(data.date).toLocaleDateString()}</p>
-                <img
-                  src={`http://openweathermap.org/img/wn/${data.icon}.png`}
-                  alt={data.description}
-                  className="h-16 w-16 mx-auto"
-                />
-                <p className="capitalize mt-2">{data.description}</p>
-                <p>
-                  {data.tempMin} - {data.tempMax}&#176;{units === 'metric' ? 'C' : 'F'}
-                </p>
-              </div>
-            ))}
-          </div>
+          <WeatherCard forecastData={forecastData} units={units} />
         </div>
 
         <div className="mt-8">
