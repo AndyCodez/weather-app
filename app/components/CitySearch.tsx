@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface WeatherInputProps {
+interface CitySearchProps {
     citySearch: string;
     onCitySearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onFetchWeather: () => void;
@@ -9,7 +9,7 @@ interface WeatherInputProps {
     error: string | null;
 }
 
-const WeatherInput: React.FC<WeatherInputProps> = ({ citySearch, onCitySearchChange, onFetchWeather, units, onUnitsChange, error }: WeatherInputProps) => {
+const CitySearch: React.FC<CitySearchProps> = ({ citySearch, onCitySearchChange, onFetchWeather, units, onUnitsChange, error }: CitySearchProps) => {
     return (
         <div className="navbar">
             <div className="navbar-start">
@@ -49,4 +49,4 @@ const WeatherInput: React.FC<WeatherInputProps> = ({ citySearch, onCitySearchCha
     )
 }
 
-export default WeatherInput
+export default CitySearch

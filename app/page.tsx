@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import WeatherInput from "./components/WeatherInput";
 import WeatherCard from "./components/WeatherCard";
+import MiscDetails from "./components/MiscDetails";
+import CitySearch from "./components/CitySearch";
 
 interface WeatherData {
   current_weather: {
@@ -97,7 +98,7 @@ export default function Home() {
 
       {/* Main section with search and weather forecast */}
       <div className="md:w-3/4 flex flex-col bg-white shadow-md rounded-lg p-6">
-        <WeatherInput
+        <CitySearch
           citySearch={citySearch}
           onCitySearchChange={(e) => setCitySearch(e.target.value)}
           onFetchWeather={fetchWeatherForCity}
@@ -116,33 +117,40 @@ export default function Home() {
           <div className="flex justify-evenly">
             {currentWeatherData && (
               <>
-                <div className="bg-gray-50 p-4 rounded-lg shadow-md text-center w-[180px]">
-                  <h3 className="font-semibold my-2">Wind Status</h3>
-                  <p>{currentWeatherData.windSpeed} km/h</p>
-                  <div className="flex mt-2 justify-center">
-                    <svg
-                      className="w-8 h-8 transform"
-                      style={{ transform: `rotate(${currentWeatherData.windDegrees}deg)` }}
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 19l-7-7 7-7"
-                      />
-                    </svg>
-                    <p>{currentWeatherData.windDirection}</p>
-                  </div>
-                </div>
-                <div className="bg-gray-50 p-4 rounded-lg shadow-md text-center w-[180px]">
-                  <h3 className="font-semibold my-2">Humidity</h3>
-                  <p className="mb-1">{currentWeatherData.humidity}%</p>
-                  <progress className="progress" value={currentWeatherData.humidity} max="100"></progress>
-                </div>
+                <MiscDetails
+                  title="Wind Status"
+                  content={
+                    <>
+                      <p>{currentWeatherData.windSpeed} km/h</p>
+                      <div className="flex mt-2 justify-center">
+                        <svg
+                          className="w-8 h-8 transform"
+                          style={{ transform: `rotate(${currentWeatherData.windDegrees}deg)` }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 19l-7-7 7-7"
+                          />
+                        </svg>
+                        <p>{currentWeatherData.windDirection}</p>
+                      </div>
+                    </>
+                  } />
+
+                <MiscDetails
+                  title="Humidity"
+                  content={
+                    <>
+                      <p className="mb-1">{currentWeatherData.humidity}%</p>
+                      <progress className="progress" value={currentWeatherData.humidity} max="100"></progress>
+                    </>
+                  } />
               </>
             )}
           </div>
