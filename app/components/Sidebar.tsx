@@ -29,7 +29,7 @@ const Sidebar = ({ currentWeatherData, units, city }: SidebarProps) => {
                         </p>
                         <p className="capitalize">{currentWeatherData.description}</p>
                         <p>{new Date(currentWeatherData.date).toLocaleDateString()}</p>
-                        <p className="mt-2">{city}</p>
+                        <p className="mt-2 capitalize">{city}</p>
                     </div>
                 </div>
             )}
