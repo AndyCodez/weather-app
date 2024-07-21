@@ -55,7 +55,9 @@ export default function Home() {
               className="h-12 w-12"
             />
             <p className="font-medium">{currentWeatherData.temp}&#176;{units === 'metric' ? 'C' : 'F'}</p>
-            <p>Temperature: {currentWeatherData.description}</p>
+            <p>{currentWeatherData.description}</p>
+            <p>{currentWeatherData.date}</p>
+            <p>{city}</p>
           </div>
         )}
       </div>
