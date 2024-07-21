@@ -1,12 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState('Nairobi');
+  const [units, setUnits] = useState('metric');
   const [currentWeatherData, setCurrentWeatherData] = useState<any>();
   const [forecastData, setForecastData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchWeatherForCity();
+  }, [units]);
 
   const fetchWeatherForCity = async () => {
     if (!city) return;
@@ -15,7 +20,7 @@ export default function Home() {
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:8000/api/weather?city=${city}`);
+      const response = await fetch(`http://localhost:8000/api/weather?city=${city}&units=${units}`);
       const data = await response.json();
 
       console.log(data);
@@ -33,6 +38,10 @@ export default function Home() {
     setForecastData(weatherData.forecast);
   };
 
+  if (loading) {
+    return "Loading weather data...";
+  }
+
   return (
     <div className="flex flex-col md:flex-row min-h-svh">
       {/* Sidebar for current weather details */}
@@ -45,7 +54,7 @@ export default function Home() {
               alt={currentWeatherData.description}
               className="h-12 w-12"
             />
-            <p className="font-medium">{currentWeatherData.temp}&#176;C</p>
+            <p className="font-medium">{currentWeatherData.temp}&#176;{units === 'metric' ? 'C' : 'F'}</p>
             <p>Temperature: {currentWeatherData.description}</p>
           </div>
         )}
@@ -66,15 +75,15 @@ export default function Home() {
               onClick={fetchWeatherForCity}
               className="btn btn-primary mt-2"
             >
-              {loading ? 'Loading...' : 'GO'}
+              GO
             </button>
             {error && <p className="text-error mt-2">{error}</p>}
           </div>
 
 
           <div className="btn-group btn-group-scrollable">
-            <input type="radio" name="options" data-content="&#176;C" className="btn" />
-            <input type="radio" name="options" data-content="F" className="btn" />
+            <input type="radio" name="options" data-content="&#176;C" className={units === 'metric' ? `btn btn-active` : 'btn'} onClick={() => setUnits('metric')} />
+            <input type="radio" name="options" data-content="&#176;F" className={units === 'imperial' ? `btn btn-active` : 'btn'} onClick={() => setUnits('imperial')} />
           </div>
         </div>
 
